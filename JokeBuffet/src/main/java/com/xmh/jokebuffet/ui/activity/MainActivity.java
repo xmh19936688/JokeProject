@@ -1,8 +1,14 @@
-package com.xmh.jokebuffet;
+package com.xmh.jokebuffet.ui.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+
+import com.google.gson.Gson;
+import com.xmh.jokebuffet.R;
+import com.xmh.jokebuffet.model.JokeResult;
+import com.xmh.jokebuffet.ui.adapter.JokeListAdapter;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -15,10 +21,18 @@ public class MainActivity extends AppCompatActivity {
     String httpUrl = "http://apis.baidu.com/showapi_open_bus/showapi_joke/joke_text";
     String httpArg = "page=1";
 
+    RecyclerView rvList;
+    private JokeListAdapter mJokeListAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mJokeListAdapter = new JokeListAdapter(MainActivity.this);
+        rvList= (RecyclerView) findViewById(R.id.rv_list);
+        rvList.setAdapter(mJokeListAdapter);
+        rvList.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
         new Thread(new Runnable() {
             @Override
@@ -27,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ((TextView)findViewById(R.id.tv_result)).setText(jsonResult);
+                        JokeResult jokeResult = new Gson().fromJson(jsonResult, JokeResult.class);
+                        mJokeListAdapter.setJokeList(jokeResult.getShowapi_res_body().getContentlist());
                     }
                 });
             }
