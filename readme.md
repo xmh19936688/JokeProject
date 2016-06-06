@@ -35,3 +35,10 @@
 1. 写xml
 1. 在ui.adapter包中建立JokeListAdapter及内部类JokeViewHolder
 1. 在MainActivity中写相应代码将json串解析并呈现到RecyclerView
+
+##引入框架ButterKnif
+1. 在build.gradle中添加`compile 'com.jakewharton:butterknife:7.0.1'`
+1. 在各Activity的onCreate中添加`ButterKnif.bind(this)`
+1. 修改View定义为`@Bind(R.id.view)View view`
+1. 删掉findViewById相关代码
+1. 在Viewholder的构造方法中添加`ButterKnif.bind(this,itemView)`*itemView为参数*
