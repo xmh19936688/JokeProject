@@ -13,6 +13,9 @@ import com.xmh.jokebuffet.model.JokeBean;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by mengh on 2016/6/6 006.
  */
@@ -54,15 +57,13 @@ public class JokeListAdapter extends RecyclerView.Adapter<JokeListAdapter.JokeVi
 
     class JokeViewHolder extends RecyclerView.ViewHolder{
 
-        TextView tvTitle;
-        TextView tvTime;
-        TextView tvContent;
+        @Bind(R.id.tv_title) TextView tvTitle;
+        @Bind(R.id.tv_time) TextView tvTime;
+        @Bind(R.id.tv_content) TextView tvContent;
 
         public JokeViewHolder(View itemView) {
             super(itemView);
-            tvTitle= (TextView) itemView.findViewById(R.id.tv_title);
-            tvTime= (TextView) itemView.findViewById(R.id.tv_time);
-            tvContent= (TextView) itemView.findViewById(R.id.tv_content);
+            ButterKnife.bind(this,itemView);
         }
     }
 }

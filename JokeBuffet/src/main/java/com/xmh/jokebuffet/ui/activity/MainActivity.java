@@ -16,21 +16,24 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
 
     String httpUrl = "http://apis.baidu.com/showapi_open_bus/showapi_joke/joke_text";
     String httpArg = "page=1";
 
-    RecyclerView rvList;
+    @Bind(R.id.rv_list) RecyclerView rvList;
     private JokeListAdapter mJokeListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         mJokeListAdapter = new JokeListAdapter(MainActivity.this);
-        rvList= (RecyclerView) findViewById(R.id.rv_list);
         rvList.setAdapter(mJokeListAdapter);
         rvList.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
