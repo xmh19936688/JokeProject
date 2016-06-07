@@ -6,6 +6,8 @@
 |v0.1|一个万能类Activity调通接口并将结果显示到界面|
 |v0.2|使用GSON解析数据并呈现到RecyclerView|
 |v0.2.1|建立AppConfig类|
+|v0.2.2|建立LogUtil类|
+|v0.3|MVC初步|
 
 #tips
 1. json串
@@ -49,3 +51,9 @@
 
 ##建立utils包
 1.建立LogUtil类，控制log
+
+##建立Web包
+1.建立WebLoader类，用于请求指定URL
+
+##建立biz包
+1. 建立DataLoader类，用于调用各种接口，并向View层回调数据
