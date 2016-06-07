@@ -5,6 +5,7 @@
 |:---:|:---:|
 |v0.1|一个万能类Activity调通接口并将结果显示到界面|
 |v0.2|使用GSON解析数据并呈现到RecyclerView|
+|v0.2.1|建立AppConfig类|
 
 #tips
 1. json串
