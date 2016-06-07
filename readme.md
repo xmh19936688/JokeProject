@@ -42,3 +42,6 @@
 1. 修改View定义为`@Bind(R.id.view)View view`
 1. 删掉findViewById相关代码
 1. 在Viewholder的构造方法中添加`ButterKnif.bind(this,itemView)`*itemView为参数*
+
+##建立application包
+1. 建立AppConfig类，存放静态终态变量
