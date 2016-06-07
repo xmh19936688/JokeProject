@@ -46,3 +46,6 @@
 
 ##建立application包
 1. 建立AppConfig类，存放静态终态变量
+
+##建立utils包
+1.建立LogUtil类，控制log
