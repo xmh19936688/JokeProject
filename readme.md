@@ -8,6 +8,7 @@
 |v0.2.1|建立AppConfig类|
 |v0.2.2|建立LogUtil类|
 |v0.3|MVC初步|
+|v0.3.1|引入Fragment|
 
 #tips
 1. json串
@@ -57,3 +58,6 @@
 
 ##建立biz包
 1. 建立DataLoader类，用于调用各种接口，并向View层回调数据
+
+##建立fragment包
+1. 将MainActivity中View相关代码移到MainFragment中，Activity只用于管理Fragment
