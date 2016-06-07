@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.xmh.jokebuffet.R;
+import com.xmh.jokebuffet.application.AppConfig;
 import com.xmh.jokebuffet.model.JokeResult;
 import com.xmh.jokebuffet.ui.adapter.JokeListAdapter;
 
@@ -20,9 +21,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
-
-    String httpUrl = "http://apis.baidu.com/showapi_open_bus/showapi_joke/joke_text";
-    String httpArg = "page=1";
 
     @Bind(R.id.rv_list) RecyclerView rvList;
     private JokeListAdapter mJokeListAdapter;
@@ -40,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                final String jsonResult = request(httpUrl, httpArg);
+                final String jsonResult = request(AppConfig.httpUrl, AppConfig.httpArg);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -71,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                     .openConnection();
             connection.setRequestMethod("GET");
             // 填入apikey到HTTP header
-            connection.setRequestProperty("apikey",  "033f3a4c145c2fada9a74aea0220fef0");
+            connection.setRequestProperty("apikey",  AppConfig.appKey);
             connection.connect();
             InputStream is = connection.getInputStream();
             reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
