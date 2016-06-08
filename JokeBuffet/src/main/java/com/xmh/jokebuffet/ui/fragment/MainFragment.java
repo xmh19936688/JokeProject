@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MainFragment extends LazyLoadBaseFragment {
+public class MainFragment extends Fragment {
 
     private View mRootView;
     @Bind(R.id.rv_list)RecyclerView rvList;
@@ -41,10 +41,7 @@ public class MainFragment extends LazyLoadBaseFragment {
         mJokeListAdapter = new JokeListAdapter(getActivity());
         rvList.setAdapter(mJokeListAdapter);
         rvList.setLayoutManager(new LinearLayoutManager(getActivity()));
-    }
 
-    @Override
-    protected void lazyLoad() {
         DataLoader.LoadJoke(new DataLoader.OnJokeLoadFinishListener() {
             @Override
             public void onFinish(final JokeResult result) {
@@ -57,4 +54,5 @@ public class MainFragment extends LazyLoadBaseFragment {
             }
         });
     }
+
 }

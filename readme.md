@@ -9,7 +9,6 @@
 |v0.2.2|建立LogUtil类|
 |v0.3|MVC初步|
 |v0.3.1|引入Fragment|
-|v0.3.2|Fragment懒加载|
 
 #tips
 1. json串
@@ -63,6 +62,7 @@
 ##建立fragment包
 1. 将MainActivity中View相关代码移到MainFragment中，Activity只用于管理Fragment
 
-##实现Fragment懒加载
+##实现Fragment懒加载*已移除*
 1. 创建虚基类LazyLoadBaseFragment继承Fragment，提供抽象方法`lazyLoad()`，完成懒加载逻辑
 1. MainFragment继承LazyLoadBaseFagment，在lazyLoad方法中请求网络数据
+**仅当使用`FragmentPagerAdapter`时会自动调用`setUserVisibleHint`才有效**
