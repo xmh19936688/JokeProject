@@ -42,7 +42,22 @@ public class MainFragment extends Fragment {
         rvList.setAdapter(mJokeListAdapter);
         rvList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        DataLoader.LoadJoke(new DataLoader.OnJokeLoadFinishListener() {
+        //region 使用原生HttpURLConnection请求
+//        DataLoader.LoadJoke(new DataLoader.OnJokeLoadFinishListener() {
+//            @Override
+//            public void onFinish(final JokeResult result) {
+//                getActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        mJokeListAdapter.setJokeList(result.getShowapi_res_body().getContentlist());
+//                    }
+//                });
+//            }
+//        });
+        //endregion
+
+        //region 使用OkHttp框架请求
+        DataLoader.LoadJokeByOkHttp(new DataLoader.OnJokeLoadFinishListener() {
             @Override
             public void onFinish(final JokeResult result) {
                 getActivity().runOnUiThread(new Runnable() {
@@ -53,6 +68,7 @@ public class MainFragment extends Fragment {
                 });
             }
         });
+        //endregion
     }
 
 }
