@@ -64,10 +64,16 @@
 1. 将MainActivity中View相关代码移到MainFragment中，Activity只用于管理Fragment
 
 ##实现Fragment懒加载*已移除*
+**仅当使用`FragmentPagerAdapter`时会自动调用`setUserVisibleHint`才有效**
 1. 创建虚基类LazyLoadBaseFragment继承Fragment，提供抽象方法`lazyLoad()`，完成懒加载逻辑
 1. MainFragment继承LazyLoadBaseFagment，在lazyLoad方法中请求网络数据
-**仅当使用`FragmentPagerAdapter`时会自动调用`setUserVisibleHint`才有效**
 
 ##引入框架OkHttp
 1. 在`build.gradle`中添加`compile 'com.squareup.okhttp3:okhttp:3.3.1'`
 1. 在`DataLoader`中调用
+
+##引入框架retrofit
+1. 在`build.gradle`中添加`compile 'com.squareup.retrofit2:retrofit:2.0.2'`
+
+##建立retrofit包
+1. 建立DataService类
