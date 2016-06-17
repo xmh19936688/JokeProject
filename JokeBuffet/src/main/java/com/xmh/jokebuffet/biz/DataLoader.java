@@ -14,6 +14,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by mengh on 2016/6/7 007.
@@ -21,7 +22,7 @@ import retrofit2.Retrofit;
 public class DataLoader {
 
     /**使用原生HttpURLConnection请求*/
-    public static void LoadJoke(final OnJokeLoadFinishListener listener){
+    public static void loadJoke(final OnJokeLoadFinishListener listener){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -33,7 +34,7 @@ public class DataLoader {
     }
 
     /**使用OkHttp框架请求*/
-    public static void LoadJokeByOkHttp(final OnJokeLoadFinishListener listener){
+    public static void loadJokeByOkHttp(final OnJokeLoadFinishListener listener){
         String httpUrl = AppConfig.httpUrl + "?" + AppConfig.httpArg;//拼接url
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder()
@@ -57,13 +58,29 @@ public class DataLoader {
         });
     }
 
+    /**使用Retrofit框架请求*/
     public static void loadJokeByRetrofit(final OnJokeLoadFinishListener listener){
-        Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl(AppConfig.BASE_URL)
-                .build();
-        DataService service=retrofit.create(DataService.class);
+        //必须在线程中访问网络
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //实例化Retrofit
+                    Retrofit retrofit=new Retrofit.Builder()
+                            .baseUrl(AppConfig.BASE_URL)//指明baseUrl
+                            .addConverterFactory(GsonConverterFactory.create())//必须指明反序列化转换器（即json解析，此处用Gson）
+                            .build();
+                    DataService service=retrofit.create(DataService.class);
 
-        retrofit2.Call<JokeResult> joke = service.getJoke(AppConfig.appKey, 1);
+                    //调用该接口中的方法
+                    JokeResult result = service.getJoke(AppConfig.appKey, 1).execute().body();
+                    //返回结果
+                    listener.onFinish(result);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     public interface OnJokeLoadFinishListener{

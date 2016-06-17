@@ -10,6 +10,7 @@
 |v0.3|MVC初步|
 |v0.3.1|引入Fragment|
 |v0.3.2|引入OkHttp框架|
+|v0.3.3|引入Retrofit框架|
 
 #tips
 1. json串
@@ -74,6 +75,8 @@
 
 ##引入框架retrofit
 1. 在`build.gradle`中添加`compile 'com.squareup.retrofit2:retrofit:2.0.2'`
+1. 在`build.gradle`中添加`compile 'com.squareup.retrofit2:converter-gson:2.0.1'`
 
 ##建立retrofit包
-1. 建立DataService类
+1. 建立DataService类，定义请求方法
+1. 在`DataLoader`中调用

@@ -43,7 +43,7 @@ public class MainFragment extends Fragment {
         rvList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         //region 使用原生HttpURLConnection请求
-//        DataLoader.LoadJoke(new DataLoader.OnJokeLoadFinishListener() {
+//        DataLoader.loadJoke(new DataLoader.OnJokeLoadFinishListener() {
 //            @Override
 //            public void onFinish(final JokeResult result) {
 //                getActivity().runOnUiThread(new Runnable() {
@@ -57,7 +57,21 @@ public class MainFragment extends Fragment {
         //endregion
 
         //region 使用OkHttp框架请求
-        DataLoader.LoadJokeByOkHttp(new DataLoader.OnJokeLoadFinishListener() {
+//        DataLoader.loadJokeByOkHttp(new DataLoader.OnJokeLoadFinishListener() {
+//            @Override
+//            public void onFinish(final JokeResult result) {
+//                getActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        mJokeListAdapter.setJokeList(result.getShowapi_res_body().getContentlist());
+//                    }
+//                });
+//            }
+//        });
+        //endregion
+
+        //region 使用Retrofit框架请求
+        DataLoader.loadJokeByRetrofit(new DataLoader.OnJokeLoadFinishListener() {
             @Override
             public void onFinish(final JokeResult result) {
                 getActivity().runOnUiThread(new Runnable() {
