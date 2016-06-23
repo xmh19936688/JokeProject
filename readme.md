@@ -11,6 +11,7 @@
 |v0.3.1|引入Fragment|
 |v0.3.2|引入OkHttp框架|
 |v0.3.3|引入Retrofit框架|
+|v0.3.4|引入RxJava&RxAndroid|
 
 #tips
 1. json串
