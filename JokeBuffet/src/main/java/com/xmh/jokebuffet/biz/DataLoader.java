@@ -15,6 +15,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.functions.Action1;
 
 /**
  * Created by mengh on 2016/6/7 007.
@@ -73,9 +74,13 @@ public class DataLoader {
                     DataService service=retrofit.create(DataService.class);
 
                     //调用该接口中的方法
-                    JokeResult result = service.getJoke(AppConfig.appKey, 1).execute().body();
-                    //返回结果
-                    listener.onFinish(result);
+                    service.getJoke(AppConfig.appKey,1).subscribe(new Action1<JokeResult>() {
+                        @Override
+                        public void call(JokeResult jokeResult) {
+                            //返回结果
+                            listener.onFinish(jokeResult);
+                        }
+                    });
                 }catch (Exception e){
                     e.printStackTrace();
                 }

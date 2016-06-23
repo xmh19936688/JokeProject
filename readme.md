@@ -80,3 +80,21 @@
 ##建立retrofit包
 1. 建立DataService类，定义请求方法
 1. 在`DataLoader`中调用
+
+##引入RxJava&RxAndroid
+1. 在`build.gradle`中添加`compile 'io.reactivex:rxjava:1.1.2'`
+1. 在`build.gradle`中添加`compile 'io.reactivex:rxandroid:1.1.0'`
+
+##修改用法
+1. 修改`DataService.getJoke()`返回类型为`Observable<JokeResult>`
+1. 修改该方法调用方式
+    ```
+	//调用该接口中的方法
+	service.getJoke(AppConfig.appKey,1).subscribe(new Action1<JokeResult>() {
+		@Override
+		public void call(JokeResult jokeResult) {
+			//返回结果
+			listener.onFinish(jokeResult);
+		}
+	});
+    ```
