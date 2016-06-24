@@ -14,6 +14,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.functions.Action1;
 
@@ -69,6 +70,7 @@ public class DataLoader {
                     //实例化Retrofit
                     Retrofit retrofit=new Retrofit.Builder()
                             .baseUrl(AppConfig.BASE_URL)//指明baseUrl
+                            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())//与RxJava结合必须指明CallAdapter
                             .addConverterFactory(GsonConverterFactory.create())//必须指明反序列化转换器（即json解析，此处用Gson）
                             .build();
                     DataService service=retrofit.create(DataService.class);
